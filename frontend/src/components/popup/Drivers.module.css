@@ -1,0 +1,44 @@
+.drivers {
+  display: grid;
+  grid-template-columns: auto auto;
+  /* background-color: rgb(174, 216, 210); */
+  padding: 5px;
+}
+.drivers img {
+  /* background-image: linear-gradient(
+      to bottom right,
+      rgb(172, 172, 172),
+      rgb(255, 255, 255)
+    ); */
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(0, 0, 0),
+    rgb(202, 19, 19)
+  );
+  border-color: white;
+  width: 60%;
+}
+
+.drivers img:hover {
+  cursor: pointer;
+}
+
+.drivers button {
+  color: #d41212;
+  font-size: 200%;
+  background-color: transparent;
+  border-style: none;
+}
+
+.drivers button:hover {
+  cursor: pointer;
+  color: grey;
+}
+
+.flag {
+  font-size: 200%;
+}
+.rating {
+  font-weight: bold;
+  font-size: 200%;
+}

@@ -1,0 +1,41 @@
+.raceinfo table {
+  border-collapse: collapse;
+  border: 1px solid;
+  border-color: #d41212;
+  width: 80%;
+  font-size: 20px;
+  background-image: linear-gradient(
+    to top right,
+    rgb(172, 172, 172),
+    rgb(255, 255, 255)
+  );
+  padding: 1px;
+  margin: auto;
+  margin-top: 2rem;
+}
+.raceinfo caption {
+  color: white;
+  background-color: #d41212;
+  border-collapse: collapse;
+  border: 3px solid;
+  border-color: #d41212;
+}
+.raceinfo tr {
+  border-collapse: collapse;
+  border: 3px solid;
+  /* border-color: #d41212; */
+  border-color: rgb(255, 255, 255);
+  left: 10%;
+  padding: 3px;
+  margin: 3px;
+}
+
+.raceinfo td:nth-child(1) {
+  font-weight: bold;
+  text-align: left;
+  padding-left: 20px;
+}
+.raceinfo td:nth-child(2) {
+  text-align: left;
+  padding-left: 20px;
+}

@@ -1,0 +1,8 @@
+{
+    "status": "ok",
+    "message": "Logged in",
+    "user": {
+        "name": "Robin",
+        "id": 1
+    }
+}

@@ -1,0 +1,119 @@
+.background {
+    background: #d41212;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+.title {
+    text-align: center;
+    color: #464646;
+}
+.login {
+    width: 90%;
+    max-width: 40rem;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+/*CSS styling used in NewRace-page*/
+.newrace {
+    position: relative;
+    transform: translateX(-20%);
+    width: 180%;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+.control p {
+    font-size: medium;
+    flex: 1;
+    color: #464646;
+    margin-bottom: 0rem;
+    margin-top: 0;
+}
+.control {
+    font-weight: normal;
+    margin: 1rem 0;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.control label,
+.control input {
+    display: block;
+}
+
+.control label {
+    font-weight: bold;
+    font-size: x-large;
+    flex: 1;
+    color: #464646;
+    margin-bottom: 0rem;
+}
+
+.control input {
+    flex: 3;
+    font: inherit;
+    padding: 0.35rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.control select {
+    flex: 3;
+    font: inherit;
+    padding: 0.35rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.control input:focus {
+    outline: none;
+    border-color: #000000;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+.control.invalid input {
+    border-color: rgb(201, 6, 6);
+    background: #f7b7b7;
+}
+
+.actions {
+    text-align: center;
+}
+
+.link {
+    text-align: center;
+    display: block;
+}
+
+.left {
+    display: grid;
+    grid-template-columns: auto;
+    /* background-color: rgb(174, 174, 216); */
+    padding: 5px;
+}
+.container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* background-color: red; */
+    padding: 10px;
+    column-gap: 4px;
+}
+.img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: auto;
+}
+@media (min-width: 768px) {
+    .control {
+        align-items: center;
+        flex-direction: row;
+    }
+}

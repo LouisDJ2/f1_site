@@ -1,0 +1,44 @@
+.editRace {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: rgb(255, 252, 252);
+  padding: 1rem;
+  text-align: center;
+  width: auto;
+  z-index: 10;
+  position: fixed;
+  margin-left: 15%;
+  font-size: 120%;
+  top: 40%;
+  left: 27%;
+}
+.select {
+  font-family: "Titillium Web", sans-serif;
+  padding: 4px;
+  border: none;
+  margin: 10px;
+  font-size: 17px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  border-radius: 3px;
+}
+
+.select:hover {
+  cursor: pointer;
+}
+
+.button {
+  position: relative;
+  font: inherit;
+  cursor: pointer;
+  background-color: #d41212;
+  color: #ffffff;
+  border: 1px solid #d41212;
+  border-radius: 4px;
+  margin: 20px;
+}
+
+.button:hover,
+.button:active {
+  background-color: transparent;
+  color: rgb(255, 0, 0);
+}
