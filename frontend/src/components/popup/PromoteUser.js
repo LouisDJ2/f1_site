@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Card from "../ui/Card";
 import classes from "./PromoteUser.module.css";
 
 function EditRace(props) {
@@ -26,7 +25,7 @@ function EditRace(props) {
 
   useEffect(() => {
     getUsersInRace();
-  }, []);
+  });
 
   function promoteUser() {
     fetch("http://localhost:3001/race/raceadmin", {

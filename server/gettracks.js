@@ -10,7 +10,7 @@
  const express = require('express');
  const gettracks = express.Router();
  const bodyParser = require("body-parser");
- var dbconnection = require('./dbconnection');
+ const dbconnection = require('./dbconnection');
  
  gettracks.use(bodyParser.json());
  gettracks.use(bodyParser.urlencoded({ extended: true }));
@@ -26,13 +26,11 @@
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
 
-                // if(err) throw err
                 console.log('The data from track table are: \n', rows)
                 
             })
@@ -46,22 +44,18 @@ const getTrackByName = (name) => {
     return new Promise(async (resolve, reject) =>{
         dbconnection.getConnection(function (err, connection) {
             if(err) throw err
-            // console.log("### NAME = ",name);
-            // var name = "Monza";
-            var sqlParam = [name];
-            var sql = "SELECT * FROM tracks WHERE name_track = ?";
+            let sqlParam = [name];
+            let sql = "SELECT * FROM tracks WHERE name_track = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
 
-                // if(err) throw err
                 console.log('The data from tracks table are: \n', rows)
             })
         })
@@ -73,16 +67,13 @@ const getTrackByID = (id) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            var sqlParam = [id];
-            var sql = "SELECT * FROM tracks WHERE unique_ID_track = ?";
+            let sqlParam = [id];
+            let sql = "SELECT * FROM tracks WHERE unique_ID_track = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
             if (!err) {
                 resolve(rows);
-                // res.send(rows)
-                //console.log('33 the result is: ?', rows);
-                //console.log('33 The type of result is: ?', typeof rows);
                 console.log("Done in if!")
                 
             } else {
@@ -99,16 +90,13 @@ const getTrackByCountry = (country) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            var sqlParam = [country];
-            var sql = "SELECT * FROM tracks WHERE country = ?";
+            let sqlParam = [country];
+            let sql = "SELECT * FROM tracks WHERE country = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
             if (!err) {
                 resolve(rows);
-                // res.send(rows)
-                //console.log('33 the result is: ?', rows);
-                //console.log('33 The type of result is: ?', typeof rows);
                 console.log("Done in if!")
                 
             } else {

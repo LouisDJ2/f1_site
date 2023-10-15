@@ -1,5 +1,4 @@
 import classes from "./Filter.module.css";
-import { useCookies } from "react-cookie";
 import { useState } from "react";
 
 function Filter(props) {

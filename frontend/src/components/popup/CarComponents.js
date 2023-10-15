@@ -33,7 +33,6 @@ function CarComponents(props) {
     setAero,
     selectedCar,
     setCar,
-    usedBudget,
     setUsedBudget,
   ] = useContext(RaceContext);
 
@@ -93,15 +92,15 @@ function CarComponents(props) {
   useEffect(() => {
     //-------Convert country names from database to iso code-------
     //-------set the right driver flags for driver 2-------
-    if (props.Drivers[indexDriver1].nation == "Great Britain") {
+    if (props.Drivers[indexDriver1].nation === "Great Britain") {
       setCountryIcon1(
         "fi fi-" + lookup.byCountry("United Kingdom").iso2.toLowerCase()
       );
-    } else if (props.Drivers[indexDriver1].nation == "The Netherlands") {
+    } else if (props.Drivers[indexDriver1].nation === "The Netherlands") {
       setCountryIcon1(
         "fi fi-" + lookup.byCountry("Netherlands").iso2.toLowerCase()
       );
-    } else if (props.Drivers[indexDriver1].nation == "USA") {
+    } else if (props.Drivers[indexDriver1].nation === "USA") {
       setCountryIcon1(
         "fi fi-" + lookup.byCountry("United States").iso2.toLowerCase()
       );
@@ -114,15 +113,15 @@ function CarComponents(props) {
       );
     }
     //-------set the right driver flags for driver 2-------
-    if (props.Drivers[indexDriver2].nation == "Great Britain") {
+    if (props.Drivers[indexDriver2].nation === "Great Britain") {
       setCountryIcon2(
         "fi fi-" + lookup.byCountry("United Kingdom").iso2.toLowerCase()
       );
-    } else if (props.Drivers[indexDriver2].nation == "The Netherlands") {
+    } else if (props.Drivers[indexDriver2].nation === "The Netherlands") {
       setCountryIcon2(
         "fi fi-" + lookup.byCountry("Netherlands").iso2.toLowerCase()
       );
-    } else if (props.Drivers[indexDriver2].nation == "USA") {
+    } else if (props.Drivers[indexDriver2].nation === "USA") {
       setCountryIcon2(
         "fi fi-" + lookup.byCountry("United States").iso2.toLowerCase()
       );
@@ -134,7 +133,7 @@ function CarComponents(props) {
             .iso2.toLowerCase()
       );
     }
-  }, [indexDriver1, indexDriver2]);
+  }, [indexDriver1, indexDriver2, lookup, props.Drivers]);
 
   //-------when one of the used components changes update the budget used-------
   useEffect(() => {
@@ -146,6 +145,7 @@ function CarComponents(props) {
     const budgetSpent =
       priceDriver1 + priceDriver2 + priceAero + priceTires + priceCar;
     setUsedBudget(budgetSpent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     indexDriver1,
     indexDriver2,

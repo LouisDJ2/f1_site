@@ -2,9 +2,8 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const users = express.Router();
 const bodyParser = require("body-parser");
-var nodemailer = require("nodemailer");
-var dbconnection = require("./dbconnection");
-var mysql = require("mysql");
+const nodemailer = require("nodemailer");
+const dbconnection = require("./dbconnection");
 
 users.use(bodyParser.json());
 users.use(bodyParser.urlencoded({ extended: true }));
@@ -16,16 +15,8 @@ users.use(function (req, res, next) {
     );
     next();
 });
-//connection to database using a pool
-var pool = mysql.createPool({
-    connectionLimit: 10,
-    host: "localhost",
-    user: "root",
-    password: "1234",
-    database: "db_fut_f1",
-});
 
-var transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: "FormulaOneEngineering@gmail.com",
@@ -36,6 +27,7 @@ var transporter = nodemailer.createTransport({
 
 //Routing
 users.get("/", function (req, res) {
+    let plaintextPassword, plaintextPassword2 = 0
     bcrypt.hash(plaintextPassword, 10, function (err, hash) {
         console.log(hash);
         bcrypt.compare(plaintextPassword2, hash, function (err, result) {
@@ -52,7 +44,6 @@ users.get("/", function (req, res) {
 
 //Function to check if user is new, if he is not new add user
 users.post("/add", function (req, res) {
-    //console.log("users add test");
     console.log(req.body.name, req.body.email, req.body.pointsoverall, req.body.pointslastrace, req.body.wins, req.body.races, req.body.authorisation);
     addUser(req.body.name, req.body.email, req.body.password, req.body.pointsoverall, req.body.pointslastrace, req.body.wins, req.body.races, req.body.authorisation, res);
 });
@@ -122,7 +113,7 @@ const addUser = async (name, mail, password, points_overall, points_last_race, w
 const login = async (name, password, res) => {
     dbconnection.getConnection(async function (err, connection) {
         let isUnique = await doesUserExist(name);
-        if (isUnique == false) {
+        if (!(isUnique)) {
             res.json({
                 status: "fault",
                 message: "Username doesnt exist",
@@ -167,7 +158,7 @@ const doesUserExist = (name) => {
                 "SELECT * FROM users WHERE name = ('" + name + "')",
                 function (err, result) {
                     connection.release();
-                    var response;
+                    let response;
                     if (result.length == 0) {
                         response = false;
                     } else {
@@ -187,7 +178,7 @@ const doesUserExistById = (id) => {
                 "SELECT * FROM users WHERE unique_ID_user = ('" + id + "')",
                 function (err, result) {
                     connection.release();
-                    var response;
+                    let response;
                     if (result.length == 0) {
                         response = false;
                     } else {
@@ -201,7 +192,7 @@ const doesUserExistById = (id) => {
 };
 
 function email(name, mail) {
-    var mailOptions = {
+    let mailOptions = {
         from: "FormulaOneEngineering@gmail.com",
         to: mail,
         subject: `Welcome ${name} to F1UT`,

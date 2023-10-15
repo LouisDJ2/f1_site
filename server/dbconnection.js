@@ -9,25 +9,13 @@
  */
 const mysql = require('mysql');
 //connection to database using a pool
-var pool = mysql.createPool({
+let pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     user: 'root',
     password: '1234',
     database: 'db_fut_f1'
 });
-
-/*
-pool.connect(function(err){
-    if (err) throw err;
-});
-
-// Routing
-connection.get('/', function(req, res){
-    res.send('Get Drivers');
-})
-*/
-
 
 module.exports = pool;
 

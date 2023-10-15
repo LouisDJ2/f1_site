@@ -20,14 +20,14 @@ condition.use(bodyParser.urlencoded({ extended: true }));
 
 // Get all conditions
 condition.get('/all', async function(req,res){
-    var conditions = await conditionDB.getAllConditions();
+    let conditions = await conditionDB.getAllConditions();
     console.log("all conditions");
     res.json({ status : "Succes", message: "Conditons Found", conditions});
 })
 
 // Get condition by ID
 condition.post('/id', async function(req,res){
-    var resultID = await conditionDB.getConditionByID(req.body.id);
+    let resultID = await conditionDB.getConditionByID(req.body.id);
     if(Object.keys(resultID).length == 0){
         res.json({ status: 'fault', message: 'Task Failed Succesfully -> Error in id'})
     }

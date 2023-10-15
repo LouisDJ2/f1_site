@@ -11,7 +11,7 @@ function RaceSearch(props) {
   const [country, setCountry] = useState("country");
   const [dateSort, setDateSort] = useState("date");
   const [admin, setAdmin] = useState(false);
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [cookies] = useCookies(["user"]);
 
   const [tracks, setTracks] = useState();
   const [races, setRaces] = useState([]);
@@ -24,6 +24,7 @@ function RaceSearch(props) {
     setTracks(props.tracks);
     setRaces(props.races);
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [filteredData, setFilteredData] = useState(races);
@@ -41,7 +42,7 @@ function RaceSearch(props) {
         tracks[x.track - 1].country ===
           (country === "country" ? tracks[x.track - 1].country : country) &&
         x.name === (name === "" ? x.name : name) &&
-        x.race_admin == (!admin ? x.race_admin : cookies.UserId)
+        x.race_admin === (!admin ? x.race_admin : cookies.UserId)
       );
     });
     console.log(dateSort);

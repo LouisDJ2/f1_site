@@ -10,7 +10,7 @@
  const express = require('express');
  const getaero = express.Router();
  const bodyParser = require("body-parser");
- var dbconnection = require('./dbconnection');
+ const dbconnection = require('./dbconnection');
  
  getaero.use(bodyParser.urlencoded({ extended: true }));
  getaero.use(bodyParser.json());
@@ -26,15 +26,11 @@
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
-
-                // if(err) throw err
                 console.log('The data from aero table are: \n', rows)
-                
             })
         })
     });
@@ -43,25 +39,20 @@
 
 // Get all stats of an aeropackage by aero brand
 const getAeroByBrand = (brand) => {
-    return new Promise(async (resolve, reject) =>{
+    return new Promise((resolve ) =>{
         dbconnection.getConnection(function (err, connection) {
             if(err) throw err
-            // console.log("### NAME = ",brand);
-            // var name = "Monza";
-            var sqlParam = [brand];
-            var sql = "SELECT * FROM aero WHERE brand = ?";
+            let sqlParam = [brand];
+            let sql = "SELECT * FROM aero WHERE brand = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
-
-                // if(err) throw err
                 console.log('The data from tracks table are: \n', rows)
             })
         })
@@ -70,21 +61,17 @@ const getAeroByBrand = (brand) => {
 
 // Get all stats of an aeropackage by ID
 const getAeroByID = (id) => {
-    return new Promise(async (resolve, reject)=>{
+    return new Promise((resolve )=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            var sqlParam = [id];
-            var sql = "SELECT * FROM aero WHERE unique_ID_aero = ?";
+            let sqlParam = [id];
+            let sql = "SELECT * FROM aero WHERE unique_ID_aero = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
             if (!err) {
                 resolve(rows);
-                // res.send(rows)
-                //console.log('33 the result is: ?', rows);
-                //console.log('33 The type of result is: ?', typeof rows);
                 console.log("Done in if!")
-                
             } else {
                 console.log(err);
             }
@@ -98,16 +85,13 @@ const getAeroByType = (type) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            var sqlParam = [type];
-            var sql = "SELECT * FROM aero WHERE type = ?";
+            let sqlParam = [type];
+            let sql = "SELECT * FROM aero WHERE type = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
             if (!err) {
                 resolve(rows);
-                // res.send(rows)
-                //console.log('33 the result is: ?', rows);
-                //console.log('33 The type of result is: ?', typeof rows);
                 console.log("Done in if!")
                 
             } else {

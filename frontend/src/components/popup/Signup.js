@@ -1,13 +1,10 @@
 import classes from "./Signup.module.css";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import car from "./pictures/f1-car.jpg";
-// import circuit from "./pictures/zandvoort.png";
 import RaceInfo from "./RaceInfo";
 import CarComponents from "./CarComponents";
-import Card from "../ui/Card";
-// import Drivers from "./Drivers";
 import { RaceContext } from "./RaceContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Signup(props) {
   const [selectedDriver1, setSelectedDriver1] = useState(1);

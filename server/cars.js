@@ -19,46 +19,42 @@
  
  // Get all cars
  cars.get('/all', async function(req, res){
-     var cars = await carDB.getAllCars();
-     //console.log("All cars: ", cars);
+     let cars = await carDB.getAllCars();
      res.json({ status: 'Succes', message: 'cars Found', cars});
  })
  
  // Get car by ID
  cars.post('/id', async function(req,res){
-     var resultID = await carDB.getCarByID(req.body.id);
+     let resultID = await carDB.getCarByID(req.body.id);
      if (Object.keys(resultID).length == 0){
         console.log("FAIL");
         res.json({ status: 'fault', message: 'Task Failed Succesfully -> Error in id'})
      }
      else{
-        //console.log('-- the result is: ', resultID);
         res.json({ status: 'ok', message: 'car Found', resultID})
      }
   })
  
  // get car by name
  cars.post('/name', async function(req, res){
-     var resultName = await carDB.getCarByName(req.body.name);
+     let resultName = await carDB.getCarByName(req.body.name);
      if (Object.keys(resultName).length == 0){
         console.log("FAIL");
         res.json({ status: 'fault', message: 'Task Failed Succesfully -> Error in name'})
      }
      else{
-        //console.log('-- the result is: ', resultName);
         res.json({ status: 'ok', message: 'car Found', resultName})
      }
   })
 
   // get car by brand
  cars.post('/brand', async function(req, res){
-    var resultBrand = await carDB.getCarByBrand(req.body.brand);
+    let resultBrand = await carDB.getCarByBrand(req.body.brand);
     if (Object.keys(resultBrand).length == 0){
        console.log("FAIL");
        res.json({ status: 'fault', message: 'Task Failed Succesfully -> Error in name'})
     }
-    else{
-       //console.log('-- the result is: ', resultBrand);     
+    else{ 
        res.json({ status: 'ok', message: 'car Found', resultBrand})
     }
  })

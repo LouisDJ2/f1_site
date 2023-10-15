@@ -10,7 +10,7 @@
 const express = require('express');
 const gettire = express.Router();
 const bodyParser = require("body-parser");
-var dbconnection = require('./dbconnection');
+const dbconnection = require('./dbconnection');
 
 gettire.use(bodyParser.json());
 gettire.use(bodyParser.urlencoded({ extended: true }));
@@ -26,13 +26,11 @@ const getAllTires = () => {
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
 
-                // if(err) throw err
                 console.log('The data from tires table are: \n', rows)
                 
             })
@@ -45,22 +43,18 @@ const getTireByName = (name) => {
     return new Promise(async (resolve, reject) =>{
         dbconnection.getConnection(function (err, connection) {
             if(err) throw err
-            // console.log("### NAME = ",name);
-            // var name = "Max Verstappen";
-            var sqlParam = [name];
-            var sql = "SELECT * FROM tires WHERE name = ?";
+            let sqlParam = [name];
+            let sql = "SELECT * FROM tires WHERE name = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
 
-                // if(err) throw err
                 console.log('The data from tires table are: \n', rows)
             })
         })
@@ -72,22 +66,18 @@ const getTireByBrand = (name) => {
     return new Promise(async (resolve, reject) =>{
         dbconnection.getConnection(function (err, connection) {
             if(err) throw err
-            // console.log("### NAME = ",name);
-            // var name = "Max Verstappen";
-            var sqlParam = [name];
-            var sql = "SELECT * FROM tires WHERE brand = ?";
+            let sqlParam = [name];
+            let sql = "SELECT * FROM tires WHERE brand = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
 
-                // if(err) throw err
                 console.log('The data from tires table are: \n', rows)
             })
         })
@@ -99,23 +89,18 @@ const getTireByID = (id) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            // var name = "Max Verstappen";
-            var sqlParam = [id];
-            var sql = "SELECT * FROM tires WHERE unique_ID_tire = ?";
+            let sqlParam = [id];
+            let sql = "SELECT * FROM tires WHERE unique_ID_tire = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
             if (!err) {
                 resolve(rows);
-                // res.send(rows)
-                //console.log('33 the result is: ?', rows);
-                //console.log('33 The type of result is: ?', typeof rows);
                 console.log("Done in if!")
                 
             } else {
                 console.log(err);
             }
-            
 
             })
         })

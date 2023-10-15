@@ -1,7 +1,7 @@
 import classes from "./RaceItem.module.css";
 import Card from "../ui/Card";
 import Signup from "../popup/Signup";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, useCallback} from "react";
 import Backdrop from "../popup/Backdrop";
 import { useCookies } from "react-cookie";
 import Ranking from "../popup/Ranking";
@@ -11,8 +11,7 @@ import { FaLevelUpAlt } from "react-icons/fa";
 function RaceItem(props) {
   //--------fetch race data from server--------
   // const [race_budget, setRaceBudget] = useState(1000);
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [rankingAvailable, setRankingAvailable] = useState(false);
+  const [cookies] = useCookies(["user"]);
   const [pointsAvailable, setPointsAvailable] = useState(false);
   const [ranking, setRanking] = useState([]);
   const [rankingIsOpen, setRankingIsOpen] = useState(false);
@@ -28,7 +27,7 @@ function RaceItem(props) {
   const [date, setDate] = useState("");
 
   //-------Load in the right track-------
-  function loadTrack() {
+  const loadTrack = useCallback (() => {
     setLoading(true);
     fetch("http://localhost:3001/race/raceinfo", {
       method: "POST",
@@ -53,7 +52,8 @@ function RaceItem(props) {
       .finally(() => {
         setLoading(false);
       });
-  }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   useEffect(() => {
     //set the date to display correct format
@@ -79,7 +79,7 @@ function RaceItem(props) {
     }
     //load in the right track
     loadTrack();
-  }, []);
+  }, [props.date, loadTrack]);
 
   //-------functions to open/close signup and send data to server-------
   const [signupIsOpen, setSignupIsOpen] = useState(false);
@@ -103,7 +103,7 @@ function RaceItem(props) {
       .then((response) => response.json())
       .then((dataAPI) => {
         console.log("remove race:", dataAPI);
-        if (dataAPI == "No Race Deleted") {
+        if (dataAPI === "No Race Deleted") {
           window.alert("Race could not be removed, ranking already made.");
         } else {
           window.alert("Race removed succesfully");
@@ -174,7 +174,7 @@ function RaceItem(props) {
       .then((response) => response.json())
       .then((dataAPI) => {
         console.log("ranking:", dataAPI);
-        if (dataAPI.status == "Succes") {
+        if (dataAPI.status === "Succes") {
           setPointsAvailable(true);
           setRanking(dataAPI.ranking);
         } else {
@@ -228,7 +228,7 @@ function RaceItem(props) {
       })
         .then((response) => response.json())
         .then((dataAPI) => {
-          if (dataAPI.status == "fault") {
+          if (dataAPI.status === "fault") {
             window.alert(dataAPI.message);
           }
         })
@@ -253,8 +253,8 @@ function RaceItem(props) {
         .then((response) => response.json())
         .then((dataAPI) => {
           //check if errors occured by checking response from the server
-          if (dataAPI.status == "fault") {
-            if (dataAPI.message == "error occured") {
+          if (dataAPI.status === "fault") {
+            if (dataAPI.message === "error occured") {
               window.alert(
                 "Please make sure you have selected an option for everything.\nCAR - TIRES - AERO / DRIVER 1 - DRIVER 2"
               );
@@ -296,6 +296,7 @@ function RaceItem(props) {
   useEffect(() => {
     getRanking();
     console.log("admin: ", props.admin, " - user: ", cookies.UserId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pointsAvailable]);
 
   const [racePassed, setRacePassed] = useState(false);
@@ -340,8 +341,8 @@ function RaceItem(props) {
               )}
 
               {/* when the current userId == id of admin the user can delete the race */}
-              {cookies.UserId == props.admin ||
-              cookies.Role == "admin_level" ? (
+              {cookies.UserId === props.admin ||
+              cookies.Role === "admin_level" ? (
                 <button className={classes.button2} onClick={deleteRace}>
                   delete
                 </button>
@@ -352,7 +353,7 @@ function RaceItem(props) {
             show ranking when the points are calculated */}
               {props.myRace ? (
                 <>
-                  {props.admin == cookies.UserId ? (
+                  {props.admin === cookies.UserId ? (
                     <>
                       {pointsAvailable ? (
                         <button
@@ -393,7 +394,7 @@ function RaceItem(props) {
                 ""
               )}
             </div>
-            {props.admin == cookies.UserId || cookies.Role == "admin_level" ? (
+            {props.admin === cookies.UserId || cookies.Role === "admin_level" ? (
               <div className={classes.edit}>
                 <button onClick={openEditRace}>
                   <FaLevelUpAlt />

@@ -2,8 +2,6 @@ import classes from "./Home.module.css";
 import HomeBar from "../components/layout/HomeBar";
 import Banner from "../components/layout/Banner";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useFetch } from "react";
 
 function Home(props) {
   return (

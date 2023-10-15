@@ -4,12 +4,11 @@ import { useCookies } from "react-cookie";
 
 function MyRaces(props) {
   const [loading, setLoading] = useState(true);
-
   const [data, setData] = useState([]);
   const [races, setRaces] = useState([]);
   const [tracks, setTracks] = useState([]);
   const [userRaces, setUserRaces] = useState([]);
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [cookies] = useCookies(["user"]);
 
   //-------fetch races from the user-------
   useEffect(() => {
@@ -32,6 +31,7 @@ function MyRaces(props) {
         console.log(userRaces);
         setLoading(false);
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function toJSON(userRace) {
@@ -47,6 +47,7 @@ function MyRaces(props) {
   //------search wich races belong to the user and store them in an array-------
   useEffect(() => {
     userRaces.forEach(toJSON);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   if (data === null || tracks === null) {

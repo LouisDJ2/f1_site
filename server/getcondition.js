@@ -10,7 +10,7 @@
 const express = require('express');
 const getcondition = express.Router();
 const bodyParser = require("body-parser");
-var dbconnection = require('./dbconnection');
+const dbconnection = require('./dbconnection');
 
 getcondition.use(bodyParser.json());
 getcondition.use(bodyParser.urlencoded({ extended: true }));
@@ -25,13 +25,10 @@ const getAllConditions = () => {
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
-
-                // if(err) throw err
                 console.log('The data from cars table are: \n', rows)
                 
             })
@@ -45,8 +42,8 @@ const getConditionByID = (id) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(function (err, connection){
             if(err) throw err
-            var sqlParam = [id]
-            var sql = "SELECT * FROM conditions WHERE unique_ID_conditions = ?"
+            let sqlParam = [id]
+            let sql = "SELECT * FROM conditions WHERE unique_ID_conditions = ?"
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 

@@ -73,7 +73,7 @@ function App() {
     if (storedUserLoggedInInformation === "1") {
       setIsLoggedIn(true);
     }
-  }, []);
+  }, [cookies.LoggedIn]);
   //post login info to server when logging in
   async function loginHandler(username, password) {
     const response = await fetch("http://localhost:3001/users/login", {

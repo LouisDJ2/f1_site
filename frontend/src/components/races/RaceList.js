@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
 import RaceItem from "./RaceItem";
 import classes from "./RaceList.module.css";
 
 function RaceList(props) {
-  if (props.races == "" && props.admin) {
+  if (props.races === "" && props.admin) {
     return <h2>You have no races, sign up to some races.</h2>;
-  } else if (props.races == "") {
+  } else if (props.races === "") {
     return <h2>No races found.</h2>;
   }
 

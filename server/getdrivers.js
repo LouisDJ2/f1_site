@@ -10,7 +10,7 @@
 const express = require('express');
 const getdrivers = express.Router();
 const bodyParser = require("body-parser");
-var dbconnection = require('./dbconnection');
+const dbconnection = require('./dbconnection');
 
 getdrivers.use(bodyParser.json());
 getdrivers.use(bodyParser.urlencoded({ extended: true }));
@@ -27,13 +27,10 @@ const getAllDrivers = () => {
 
                 if (!err) {
                     resolve(rows);
-                    // res.send(rows)
                     console.log("Done in if!");
                 } else {
                     console.log(err)
                 }
-
-                // if(err) throw err
                 console.log('The data from drivers table are: \n', rows)
                 
             })
@@ -46,10 +43,8 @@ const getDriverByName = (name) => {
     return new Promise(async (resolve, reject) =>{
         dbconnection.getConnection(function (err, connection) {
             if(err) throw err
-            // console.log("### NAME = ",name);
-            // var name = "Max Verstappen";
-            var sqlParam = [name];
-            var sql = "SELECT * FROM drivers WHERE name = ?";
+            let sqlParam = [name];
+            let sql = "SELECT * FROM drivers WHERE name = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
@@ -60,8 +55,6 @@ const getDriverByName = (name) => {
                 } else {
                     console.log(err)
                 }
-
-                // if(err) throw err
                 console.log('The data from drivers table are: \n', rows)
             })
         })
@@ -73,9 +66,8 @@ const getDriverByID = (id) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            // var name = "Max Verstappen";
-            var sqlParam = [id];
-            var sql = "SELECT * FROM drivers WHERE unique_ID_driver = ?";
+            let sqlParam = [id];
+            let sql = "SELECT * FROM drivers WHERE unique_ID_driver = ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
@@ -86,7 +78,6 @@ const getDriverByID = (id) => {
             } else {
                 console.log(err);
             }
-            
 
             })
         })
@@ -98,9 +89,8 @@ const getDriverByAvgMore = (num) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            // var name = "Max Verstappen";
-            var sqlParam = [num];
-            var sql = "SELECT * FROM drivers WHERE average > ?";
+            let sqlParam = [num];
+            let sql = "SELECT * FROM drivers WHERE average > ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 
@@ -122,9 +112,8 @@ const getDriverByAvgLess = (num) => {
     return new Promise(async (resolve, reject)=>{
         dbconnection.getConnection(async function (err, connection){
             if(err) throw err
-            // var name = "Max Verstappen";
-            var sqlParam = [num];
-            var sql = "SELECT * FROM drivers WHERE average < ?";
+            let sqlParam = [num];
+            let sql = "SELECT * FROM drivers WHERE average < ?";
             connection.query(sql, sqlParam, (err, rows) => {
                 connection.release()
 

@@ -7,9 +7,10 @@ function Ranking(props) {
   useEffect(() => {
     setRanking(props.ranking);
     filter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.ranking]);
 
-  if (props.ranking == "") {
+  if (props.ranking === "") {
     return <div className={classes.ranking}>no ranking available</div>;
   }
 
